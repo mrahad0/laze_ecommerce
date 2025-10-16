@@ -8,4 +8,4 @@ class AuthController extends GetxController{
     isRememberMe.value=value;
     update();
   }
-}
+      }
