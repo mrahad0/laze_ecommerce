@@ -81,7 +81,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                         ),
                         Switch(
                           activeColor: Colors.green,
-                          value: _authController.isRememberMe.value,
+                          value: Get.find<AuthController>().isRememberMe,
                           onChanged: _authController.onRememberMeChanged,
                         ),
                       ],

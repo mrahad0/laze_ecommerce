@@ -1,3 +1,4 @@
+import 'package:e_commerce/Views/pages/Home/chooseBrand_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -75,8 +76,7 @@ class ChooseBrands extends StatelessWidget {
               return InkWell(
                 // InkWell-এর onTap ফাংশন:
                 onTap: () {
-                  Get.toNamed(
-                    Routes.chooseBrandScreen,
+                  Get.to(BrandListScreen(brandLogoPath: ""),
                     arguments: brand["icon"], // শুধু ডেটা পাস
                   );
                 },

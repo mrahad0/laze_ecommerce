@@ -1,11 +1,39 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 
-class AuthController extends GetxController{
+class AuthController extends GetxController {
+  bool isRememberMe = false;
 
-  RxBool isRememberMe=false.obs;
-
-  onRememberMeChanged(bool value){
-    isRememberMe.value=value;
+  onRememberMeChanged(value) {
+    isRememberMe = value;
     update();
   }
+
+  /// <================  Otp Verification Screen ======>
+
+  RxInt secondsRemaining = 30.obs; // initial timer seconds
+  RxBool enableResend = false.obs;
+  Timer? timer;
+
+  dispostTimer(){
+    timer?.cancel();
+    secondsRemaining.value = 30;
+    enableResend.value = false;
+  }
+
+
+  void startTimer() {
+    timer?.cancel(); // stop previous timer if any
+    secondsRemaining.value = 30;
+    enableResend.value = false;
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (secondsRemaining > 0) {
+        secondsRemaining.value--;
+      } else {
+        enableResend.value = true;
+        timer.cancel();
       }
+    });
+  }
+}
