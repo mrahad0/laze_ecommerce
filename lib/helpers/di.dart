@@ -4,5 +4,6 @@ import '../controllers/wishList_controller.dart';
 
 Future init()async{
   Get.lazyPut(() => AuthController());
+  Get.lazyPut(() => WishListController(), fenix: true);
 
 }

@@ -19,7 +19,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Cart"), centerTitle: true),
+      appBar: AppBar(title: const Text("Cart"), centerTitle: true,automaticallyImplyLeading: false,),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -179,7 +179,8 @@ class _CartScreenState extends State<CartScreen> {
 
                     Spacer(),
 
-                    Icon(Icons.arrow_forward_ios_outlined, size: 15),
+                    IconButton(onPressed: (){},
+                        icon:Icon( Icons.arrow_forward_ios_outlined, size: 15))
                   ],
                 ),
                 SizedBox(height: 10),
@@ -240,7 +241,11 @@ class _CartScreenState extends State<CartScreen> {
 
                     Spacer(),
 
-                    Icon(Icons.arrow_forward_ios_outlined, size: 15),
+                    IconButton(onPressed: (){
+                      Get.toNamed("/payment_Card");
+                    },
+                        icon:Icon( Icons.arrow_forward_ios_outlined, size: 15))
+
                   ],
                 ),
                 SizedBox(height: 10),

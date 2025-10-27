@@ -1,21 +1,33 @@
 import 'package:get/get.dart';
 
 class WishListController extends GetxController {
-  var wishList = [].obs;
+  // Favourite product list
+  final RxList<Map<String, dynamic>> wishList = <Map<String, dynamic>>[].obs;
 
-  void toggleWish(Map product) {
-    if (wishList.contains(product)) {
-      wishList.remove(product);
+  /// Toggle Wishlist Add/Remove
+  void toggleWish(Map<String, dynamic> product) {
+    // check if already added
+    bool isExist = wishList.any((item) => item["productName"] == product["productName"]);
+
+    if (isExist) {
+      wishList.removeWhere((item) => item["productName"] == product["productName"]);
     } else {
       wishList.add(product);
     }
   }
 
-  bool isFavourite(Map product) {
-    return wishList.contains(product);
+  /// Check if a product is favourite
+  bool isFavourite(Map<String, dynamic> product) {
+    return wishList.any((item) => item["productName"] == product["productName"]);
   }
 
-  void removeProduct(Map product) {
-    wishList.remove(product);
+  /// Remove product manually (used in delete dialog)
+  void removeProduct(Map<String, dynamic> product) {
+    wishList.removeWhere((item) => item["productName"] == product["productName"]);
+  }
+
+  /// Clear all wishlist items (optional)
+  void clearAll() {
+    wishList.clear();
   }
 }

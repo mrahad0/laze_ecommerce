@@ -12,6 +12,7 @@ import '../Views/pages/Authentication/SignUpScreen.dart';
 import '../Views/pages/Authentication/SplashScreen.dart';
 import '../Views/pages/Drawer/DrawerScreen.dart';
 import '../Views/pages/Home/home_Screen.dart';
+import '../Views/pages/PaymentCard/payment_Card.dart';
 import '../Views/pages/Setting/AboutUsScreen.dart';
 import '../Views/pages/Setting/PrivacyPolicyScreen.dart';
 import '../Views/pages/Setting/SettingScreen.dart';
@@ -35,6 +36,9 @@ class Routes{
   static String aboutUs= "/aboutUs_page";
   static String mainScreen="/main_screen";
   static String brandListScreen = "/brandList_Screen";
+  static String paymentCard = "/payment_Card";
+
+
 
 
 }
@@ -54,5 +58,6 @@ List<GetPage> pages=[
   GetPage(name: Routes.aboutUs, page:()=> Aboutusscreen()),
   GetPage(name: Routes.mainScreen, page:()=> MainScreen()),
   GetPage(name: Routes.brandListScreen, page: () => BrandListScreen(brandLogoPath: Get.arguments,),),
+  GetPage(name: Routes.paymentCard, page: () => PaymentCard()),
 
 ];

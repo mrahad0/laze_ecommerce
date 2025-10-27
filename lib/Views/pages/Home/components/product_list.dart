@@ -10,10 +10,10 @@ import '../../../../controllers/wishList_controller.dart';
 class ProductList extends StatelessWidget {
       ProductList ({super.key});
 
-      final wishController = Get.find<WishListController>();
+      final WishListController wishController = Get.put(WishListController());
 
 
-  List products = [
+      List products = [
     {
       "productName": "Nike Sportswear Club Fleece",
       "image": "assets/images/img.png",
@@ -31,8 +31,8 @@ class ProductList extends StatelessWidget {
       "price": "\$160"
     },
     {
-      "productName": "Nike Sportswear Club Fleece",
-      "image": "assets/images/img_3.png",
+      "productName": "Nike Sportswear Club",
+      "image": "assets/images/Rectangle 569.png",
       "price": "\$150"
     },
 
@@ -77,20 +77,20 @@ class ProductList extends StatelessWidget {
                   Positioned(
                     top: 10,
                     right: 10,
-                    child:  Obx(() {
-                      bool fav = wishController.isFavourite(product);
+                    child: Obx(() {
+                      bool isFav = wishController.isFavourite(product);
                       return GestureDetector(
                         onTap: () {
                           wishController.toggleWish(product);
                         },
                         child: Icon(
                           Icons.favorite,
-                          color: fav ? Colors.red : Colors.grey,
-                          size: 28,
+                          color: isFav ? Colors.red : Colors.grey,
+                          size: 26,
                         ),
                       );
                     }),
-                  ),
+                    ),
                 ],
               ),
               Text(

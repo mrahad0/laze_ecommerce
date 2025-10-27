@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CustomTitle extends StatelessWidget {
-  const CustomTitle({super.key});
+class CustomeTitle2 extends StatelessWidget {
+   CustomeTitle2 ({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +16,9 @@ class CustomTitle extends StatelessWidget {
             children: const [
               Text(
                 "365 Items",
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                style:TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
               ),
+
               SizedBox(height: 5),
               Text(
                 "Available in stock",
@@ -36,8 +37,8 @@ class CustomTitle extends StatelessWidget {
             child: Row(
               children: [
                 SvgPicture.asset("assets/icons/sort.svg", fit: BoxFit.scaleDown),
-                const SizedBox(width: 5),
-                const Text(
+                 SizedBox(width: 5),
+                Text(
                   "Sort",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                 ),
