@@ -76,10 +76,12 @@ class ChooseBrands extends StatelessWidget {
               return InkWell(
                 // InkWell-এর onTap ফাংশন:
                 onTap: () {
-                  Get.to(BrandListScreen(brandLogoPath: ""),
-                    arguments: brand["icon"], // শুধু ডেটা পাস
+                  Get.toNamed(
+                    Routes.brandListScreen,
+                    arguments: brand["icon"],
                   );
                 },
+
                 child: Container(
                   height: 50,
                   width: 115,

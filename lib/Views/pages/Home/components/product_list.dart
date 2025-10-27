@@ -1,9 +1,18 @@
+import 'package:e_commerce/Views/pages/Product_Detail/productDetail_Screen.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+
+import '../../../../controllers/wishList_controller.dart';
 
 class ProductList extends StatelessWidget {
       ProductList ({super.key});
+
+      final wishController = Get.find<WishListController>();
+
+
   List products = [
     {
       "productName": "Nike Sportswear Club Fleece",
@@ -45,47 +54,64 @@ class ProductList extends StatelessWidget {
 
         final product = repeatedList[index];
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image(
-                    height: 200,
-                    width: double.infinity,
-                    image: AssetImage(
-                      product["image"],
+        return GestureDetector(
+          onTap: (){
+            Get.to(ProductDetailScreen(productName: product["productName"], image: product["image"], price: product["price"],));
+            },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image(
+                      height: 200,
+                      width: double.infinity,
+                      image: AssetImage(
+                        product["image"],
+                      ),
+                      fit: BoxFit.cover,
                     ),
-                    fit: BoxFit.cover,
                   ),
-                ),
-                Positioned(
-                  top: 10,
-                  right: 10,
-                  child: SvgPicture.asset("assets/icons/Heart.svg"),
-                ),
-              ],
-            ),
-            Text(
-              product["productName"],
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+                  Positioned(
+                    top: 10,
+                    right: 10,
+                    child:  Obx(() {
+                      bool fav = wishController.isFavourite(product);
+                      return GestureDetector(
+                        onTap: () {
+                          wishController.toggleWish(product);
+                        },
+                        child: Icon(
+                          Icons.favorite,
+                          color: fav ? Colors.red : Colors.grey,
+                          size: 28,
+                        ),
+                      );
+                    }),
+                  ),
+                ],
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            SizedBox(height: 5),
-            Text(
-              product["price"],
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+              Text(
+                product["productName"],
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-            ),
-          ],
+              SizedBox(height: 5),
+              Text(
+                product["price"],
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         );
       },
     );

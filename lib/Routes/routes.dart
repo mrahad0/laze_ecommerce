@@ -1,16 +1,22 @@
-import 'package:e_commerce/Views/pages/DrawerScreens/DrawerScreen.dart';
-import 'package:e_commerce/Views/pages/HomeScreens/HomeScreen.dart';
-import 'package:e_commerce/Views/pages/SettingScreens/PrivacyPolicyScreen.dart';
-import 'package:e_commerce/Views/pages/SettingScreens/TermsOfServiceScreen.dart';
+
+
+
+import 'package:e_commerce/Views/pages/Home/chooseBrand_Screen.dart';
+import 'package:e_commerce/Views/pages/MainScreen/main_Screen.dart';
 import 'package:get/get.dart';
-import '../Views/pages/SettingScreens/AboutUsScreen.dart';
-import '../Views/pages/SettingScreens/SettingScreen.dart';
-import '../Views/pages/LoginOrSignUpScreens/ForgotPassScreen.dart';
-import '../Views/pages/LoginOrSignUpScreens/LoginScreen.dart';
-import '../Views/pages/LoginOrSignUpScreens/NewPassScreen.dart';
-import '../Views/pages/LoginOrSignUpScreens/OTPScreen.dart';
-import '../Views/pages/LoginOrSignUpScreens/SignUpScreen.dart';
-import '../Views/pages/LoginOrSignUpScreens/SplashScreen.dart';
+import '../Views/pages/Authentication/ForgotPassScreen.dart';
+import '../Views/pages/Authentication/LoginScreen.dart';
+import '../Views/pages/Authentication/NewPassScreen.dart';
+import '../Views/pages/Authentication/OTPScreen.dart';
+import '../Views/pages/Authentication/SignUpScreen.dart';
+import '../Views/pages/Authentication/SplashScreen.dart';
+import '../Views/pages/Drawer/DrawerScreen.dart';
+import '../Views/pages/Home/home_Screen.dart';
+import '../Views/pages/Setting/AboutUsScreen.dart';
+import '../Views/pages/Setting/PrivacyPolicyScreen.dart';
+import '../Views/pages/Setting/SettingScreen.dart';
+import '../Views/pages/Setting/TermsOfServiceScreen.dart';
+
 
 
 
@@ -27,6 +33,9 @@ class Routes{
   static String termsOfService= "/termsOsService_page";
   static String privacyPolicy= "/privacyPolicy_page";
   static String aboutUs= "/aboutUs_page";
+  static String mainScreen="/main_screen";
+  static String brandListScreen = "/brandList_Screen";
+
 
 }
 
@@ -43,4 +52,7 @@ List<GetPage> pages=[
   GetPage(name: Routes.termsOfService, page:()=> TermsOfServicePage()),
   GetPage(name: Routes.privacyPolicy, page:()=> Privacypolicyscreen()),
   GetPage(name: Routes.aboutUs, page:()=> Aboutusscreen()),
+  GetPage(name: Routes.mainScreen, page:()=> MainScreen()),
+  GetPage(name: Routes.brandListScreen, page: () => BrandListScreen(brandLogoPath: Get.arguments,),),
+
 ];

@@ -1,5 +1,6 @@
 
 import 'package:e_commerce/Utils/color.dart';
+import 'package:e_commerce/Views/base/custom_button.dart';
 import 'package:e_commerce/controllers/cart_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -350,24 +351,7 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
             SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
-                backgroundColor: CustomColors.primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Text(
-                "Check Out",
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            CustomButton(title: "Check Out",onpress: (){},)
           ],
         ),
       ),

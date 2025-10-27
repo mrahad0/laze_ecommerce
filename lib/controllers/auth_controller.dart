@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
-  bool isRememberMe = false;
+ RxBool isRememberMe = false.obs;
 
-  onRememberMeChanged(value) {
-    isRememberMe = value;
+    onRememberMeChanged(value) {
+    isRememberMe.value = value;
     update();
   }
 
