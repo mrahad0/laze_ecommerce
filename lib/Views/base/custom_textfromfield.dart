@@ -7,14 +7,17 @@ class CustomTextFromField extends StatelessWidget {
     super.key,
     this.controller,
     this.hintText,
+    this.hintTextstyle,
     this.labelText,
     this.obscureText=false,
     this.validator,
+    required TextStyle hintStyle,
 
   }) ;
 
   final TextEditingController? controller;
   final String? hintText;
+  final TextStyle? hintTextstyle;
   final String? labelText;
   bool obscureText;
   final String? Function(String?)? validator;
@@ -27,6 +30,7 @@ class CustomTextFromField extends StatelessWidget {
       validator: validator,
       decoration:InputDecoration(
         hintText: hintText,
+        hintStyle: hintTextstyle,
         labelText: labelText,
         border: UnderlineInputBorder(
           borderSide: BorderSide(color:Colors.grey),

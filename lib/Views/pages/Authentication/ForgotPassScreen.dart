@@ -68,8 +68,9 @@ class ForgotpassScreen extends StatelessWidget {
                                   return null; // সব ঠিক থাকলে
                                 },
                                 controller: _userCtrl,
-                                obscureText: true,
+                                obscureText: false,
                                 hintText: "Enter your Username",
+                                hintStyle: TextStyle(color: CustomColors.greyColor),
                                 labelText: "Username",
                               ),
 
@@ -87,13 +88,16 @@ class ForgotpassScreen extends StatelessWidget {
 
                               SizedBox(height: 20,),
 
-                              CustomButton(
-                                title: "Confirm Mail",
-                                onpress: (){
-                                if(_formKey.currentState!.validate()){
-                                  Get.toNamed("/otp_Screen");
-                                }
-                              },)
+                              Obx(()
+                                => CustomButton(
+                                  title: "Confirm Username",
+                                  isLoading: _authController.isLoading.value,
+                                  onpress: (){
+                                  if(_formKey.currentState!.validate()){
+                                    _authController.forgetpassword(_userCtrl.text);
+                                  }
+                                },),
+                              )
 
                             ],
                           ),

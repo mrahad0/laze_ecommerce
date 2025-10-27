@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Utils/color.dart';
+import '../../../controllers/auth_controller.dart';
 import '../../base/custom_textfromfield.dart';
 
 class NewPassScreen extends StatelessWidget {
@@ -11,6 +12,7 @@ class NewPassScreen extends StatelessWidget {
 
   TextEditingController _newPass=TextEditingController();
   TextEditingController _confirmPass=TextEditingController();
+  final _authController = Get.put(AuthController());
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   @override
@@ -51,6 +53,7 @@ class NewPassScreen extends StatelessWidget {
                     },
                     controller: _newPass,
                     hintText: "Enter your new password",
+                    hintStyle: TextStyle(color: CustomColors.greyColor),
                     labelText: "New Password",
 
                   ),
@@ -68,6 +71,7 @@ class NewPassScreen extends StatelessWidget {
                     controller: _confirmPass,
                     obscureText: true,
                     hintText: "Enter your confirm password",
+                    hintStyle: TextStyle(color: CustomColors.greyColor),
                     labelText: "Confirm Password",
                   ),
 
@@ -85,13 +89,20 @@ class NewPassScreen extends StatelessWidget {
 
                   SizedBox(height: 20,),
 
-                 CustomButton(
-                   title: "Reset Password",
-                   onpress: (){
-                     if(_formkey.currentState!.validate()){
-                       Get.toNamed("/login_screen");
-                     }
-                   },)
+                 Obx(()
+                   => CustomButton(
+                     title: "Reset Password",
+                     isLoading: _authController.isLoading.value,
+                     onpress: (){
+                       if(_formkey.currentState!.validate()){
+                         _authController.reset_password(
+                             _newPass.text.trim(),
+                             Get.arguments,
+                         );
+
+                       }
+                     },),
+                 )
                 ],
               ),
             ),

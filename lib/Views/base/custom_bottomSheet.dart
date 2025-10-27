@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Data/utils/app_constants.dart';
+import '../../Routes/routes.dart';
+import '../../helpers/prefs_helpers.dart';
+
 void showLogoutBottomSheet() {
   Get.bottomSheet(
     Container(
@@ -54,9 +58,9 @@ void showLogoutBottomSheet() {
               // Yes, Logout Button
               Expanded(
                 child: OutlinedButton(
-                  onPressed: () {
-                    Get.back(); // close bottom sheet
-                    // এখানে logout logic দাও
+                  onPressed: () async {
+                    await PrefsHelper.remove(AppConstants.bearerToken);
+                    Get.offAllNamed(Routes.loginScreen);
                     Get.snackbar("Logged out", "You have been logged out!");
                   },
                   style: OutlinedButton.styleFrom(

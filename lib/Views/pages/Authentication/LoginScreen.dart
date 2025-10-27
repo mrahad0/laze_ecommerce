@@ -14,7 +14,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _emailCtrl=TextEditingController();
+  TextEditingController _userCtrl=TextEditingController();
   TextEditingController _passCtrl=TextEditingController();
 
   final AuthController _authController = Get.put(AuthController());
@@ -49,16 +49,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomTextFromField(
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Email is required!";
+                          return "Username is required!";
                         }
-                        if (!value.contains("@")) {
-                          return "Enter a valid email!";
-                        }
-                        return null; // সব ঠিক থাকলে
+                        return null;
                       },
-                      controller: _emailCtrl,
-                      hintText: "Enter your email",
-                      labelText: "Email",
+                      controller: _userCtrl,
+                      hintText: "Enter your username",
+                      hintStyle: TextStyle(color: CustomColors.greyColor),
+                      labelText: "Username",
 
 
                     ),
@@ -69,11 +67,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (value == null || value.isEmpty) {
                           return "Password is required!";
                         }
-                        return null; // সব ঠিক থাকলে
+                        return null;
                       },
                       controller: _passCtrl,
                       obscureText: true,
                       hintText: "Enter your password",
+                      hintStyle: TextStyle(color: CustomColors.greyColor),
                       labelText: "Password",
                     ),
 
@@ -110,13 +109,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     )),
                     SizedBox(height: 60,),
 
-                     CustomButton(
-                     title: "Login",
-                     onpress: (){
-                       if (_formKey.currentState!.validate()){
-                         Get.toNamed("/main_screen");
-                       }
-                     },),
+                     Obx(()=>CustomButton(
+                       title: "Login",
+                       isLoading: _authController.isLoading.value,
+                       onpress: (){
+                         if (_formKey.currentState!.validate()){
+                           _authController.login(_userCtrl.text.trim(), _passCtrl.text);
+                         }
+                       },),
+                     ),
 
                     SizedBox(height: 20,),
 

@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:e_commerce/Data/services/api_checker.dart';
 import 'package:e_commerce/Utils/color.dart';
 import 'package:e_commerce/Views/base/custom_button.dart';
 import 'package:e_commerce/controllers/auth_controller.dart';
@@ -6,6 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
+
+import '../../../Data/services/api_client.dart';
+import '../../../Data/services/api_constant.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({super.key});
@@ -91,8 +97,24 @@ class _OTPScreenState extends State<OTPScreen> {
                           SizedBox(height: 166),
                           _authController.enableResend.value
                               ? TextButton(
-                            onPressed: () {
+                            onPressed: () async{
                               _authController.startTimer();
+
+                              _authController.isLoading(true);
+
+                                var headers = {'Content-Type': 'application/json'};
+                                var response = await ApiClient.postData(
+                                  ApiConstant.forgetpassword,
+                                  jsonEncode({"username":Get.arguments}),
+                                  headers: headers,
+                                );
+                                if(response.statusCode != 200){
+                                  ApiChecker.checkApi(response);
+                                }
+                              _authController.isLoading(false);
+
+
+
                             },
                             child: Text("Resend Code"),
                           )
@@ -119,13 +141,16 @@ class _OTPScreenState extends State<OTPScreen> {
 
                           SizedBox(height: 40,),
 
-                          CustomButton(
-                            title:"Confirm Code",
-                            onpress: () {
-                              if (_formKey.currentState!.validate()) {
-                                Get.toNamed("/newPass_screen");
-                              }
-                            },
+                          Obx(()
+                            =>CustomButton(
+                              title:"Confirm Code",
+                              isLoading: _authController.isLoading.value,
+                              onpress: () {
+                                if (_formKey.currentState!.validate()) {
+                                  _authController.otpverify(_pinPutController.text,Get.arguments);
+                                }
+                              },
+                            ),
                           )
                         ],
                       ),

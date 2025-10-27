@@ -14,6 +14,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreen extends State<SignUpScreen> {
+  TextEditingController _nameCtrl=TextEditingController();
   TextEditingController _userCtrl=TextEditingController();
   TextEditingController _emailCtrl=TextEditingController();
   TextEditingController _passCtrl=TextEditingController();
@@ -52,14 +53,47 @@ class _SignUpScreen extends State<SignUpScreen> {
                       CustomTextFromField(
                         validator: (value){
                           if(value == null || value.isEmpty){
-                            return "Enter Username";
+                            return "Enter first name";
+                          }
+                          return null;
+                        },
+                        controller: _nameCtrl,
+                        hintText: "Enter first name",
+                        hintStyle: TextStyle(color: CustomColors.greyColor),
+                        labelText: "First Name",
+
+                      ),
+
+                      SizedBox(height: 10,),
+
+                      CustomTextFromField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Email is required!";
+                          }
+                          return null;
+                        },
+                        controller: _emailCtrl,
+                        obscureText: false,
+                        hintText: "Enter your email",
+                        hintStyle: TextStyle(color: CustomColors.greyColor),
+                        labelText: "Email",
+                      ),
+
+                      SizedBox(height: 10,),
+
+                      CustomTextFromField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Username is required!";
                           }
                           return null;
                         },
                         controller: _userCtrl,
-                        hintText: "Enter username",
+                        obscureText: false,
+                        hintText: "Enter your username",
+                        hintStyle: TextStyle(color: CustomColors.greyColor),
                         labelText: "Username",
-
                       ),
 
                       SizedBox(height: 10,),
@@ -74,25 +108,9 @@ class _SignUpScreen extends State<SignUpScreen> {
                         controller: _passCtrl,
                         obscureText: true,
                         hintText: "Enter your password",
+                        hintStyle: TextStyle(color: CustomColors.greyColor),
                         labelText: "Password",
 
-                      ),
-                      SizedBox(height: 10,),
-
-                      CustomTextFromField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Email is required!";
-                          }
-                          if (!value.contains("@")) {
-                            return "Enter a valid email!";
-                          }
-                          return null; // সব ঠিক থাকলে
-                        },
-                        controller: _emailCtrl,
-                        obscureText: true,
-                        hintText: "Enter your email",
-                        labelText: "Email",
                       ),
 
                       SizedBox(height:70 ,),
@@ -136,13 +154,16 @@ class _SignUpScreen extends State<SignUpScreen> {
 
                       SizedBox(height: 20,),
 
-                      CustomButton(
-                        title: "Sign Up",
-                        onpress: (){
-                          if(_formKey.currentState!.validate()){
-                          Get.snackbar("Sign Up", "SignUp Complete");
-                          };
-                        },
+                      Obx(()
+                        => CustomButton(
+                          title: "Sign Up",
+                          isLoading: _authController.isLoading.value,
+                          onpress: (){
+                            if(_formKey.currentState!.validate()){
+                              _authController.signUp(_nameCtrl.text, _emailCtrl.text, _userCtrl.text, _passCtrl.text);
+                            };
+                          },
+                        ),
                       ),
                     ],
                   ),
