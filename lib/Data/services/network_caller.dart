@@ -13,7 +13,6 @@ class NetworkResponse {
     required this.isSuccess,
     required this.statusCode,
     this.responseData,
-
     this.errorMassage = 'Something happend wrong',
   });
 }
@@ -47,7 +46,6 @@ class NetworkCaller{
           statusCode: -1,
           errorMassage: e.toString()
       );
-
 
     }
 

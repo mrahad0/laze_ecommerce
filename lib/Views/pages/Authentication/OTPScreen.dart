@@ -88,9 +88,9 @@ class _OTPScreenState extends State<OTPScreen> {
                                 return "Please enter the OTP code";
                               }
                               if (value.length < 6) {
-                                return "Enter a valid code"; // ✅ ৬ এর কম হলে error দেখাবে
+                                return "Enter a valid code";
                               }
-                              return null; // সব ঠিক থাকলে
+                              return null;
                             },
                             length: 6,
                           ),

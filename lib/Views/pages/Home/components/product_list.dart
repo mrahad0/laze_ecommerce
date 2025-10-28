@@ -1,4 +1,6 @@
+import 'package:e_commerce/Data/services/api_constant.dart';
 import 'package:e_commerce/Views/pages/Product_Detail/productDetail_Screen.dart';
+import 'package:e_commerce/controllers/product_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -7,10 +9,17 @@ import 'package:get/get.dart';
 
 import '../../../../controllers/wishList_controller.dart';
 
-class ProductList extends StatelessWidget {
+class ProductList extends StatefulWidget {
       ProductList ({super.key});
 
+  @override
+  State<ProductList> createState() => _ProductListState();
+}
+
+class _ProductListState extends State<ProductList> {
       final WishListController wishController = Get.put(WishListController());
+
+      final _productController = Get.put(ProductController());
 
 
       List products = [
@@ -37,27 +46,36 @@ class ProductList extends StatelessWidget {
     },
 
   ];
+
+      @override
+  void initState() {
+    _productController.fetchProductData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
 
-    final repeatedList = List.generate(10, (i) => products[i % products.length]);
 
-    return MasonryGridView.count(
+
+    return Obx(()=> _productController.isProductLoading.value?
+    Center(child: CircularProgressIndicator(),):
+    MasonryGridView.count(
       crossAxisCount: 2,
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
-      itemCount: repeatedList.length,
+      itemCount: _productController.productList.length,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.symmetric(horizontal: 20),
       itemBuilder: (context, index) {
 
-        final product = repeatedList[index];
+        final product =   _productController.productList[index];
 
         return GestureDetector(
           onTap: (){
-            Get.to(ProductDetailScreen(productName: product["productName"], image: product["image"], price: product["price"],));
-            },
+
+          },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -68,8 +86,8 @@ class ProductList extends StatelessWidget {
                     child: Image(
                       height: 200,
                       width: double.infinity,
-                      image: AssetImage(
-                        product["image"],
+                      image: NetworkImage(
+                        "${ApiConstant.baseUrl}${product.images[0]}",
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -78,23 +96,23 @@ class ProductList extends StatelessWidget {
                     top: 10,
                     right: 10,
                     child: Obx(() {
-                      bool isFav = wishController.isFavourite(product);
+
                       return GestureDetector(
                         onTap: () {
-                          wishController.toggleWish(product);
+
                         },
                         child: Icon(
                           Icons.favorite,
-                          color: isFav ? Colors.red : Colors.grey,
+                          color: Colors.grey,
                           size: 26,
                         ),
                       );
                     }),
-                    ),
+                  ),
                 ],
               ),
               Text(
-                product["productName"],
+                product.name,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -104,7 +122,7 @@ class ProductList extends StatelessWidget {
               ),
               SizedBox(height: 5),
               Text(
-                product["price"],
+               product.price,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -114,6 +132,6 @@ class ProductList extends StatelessWidget {
           ),
         );
       },
-    );
+    ));
   }
 }
