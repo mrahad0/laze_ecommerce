@@ -1,3 +1,4 @@
+import 'package:e_commerce/Views/base/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -131,7 +132,7 @@ class _EditScreenState extends State<EditScreen> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // User Avatar with Edit Icon
             Center(
@@ -224,30 +225,7 @@ class _EditScreenState extends State<EditScreen> {
             const SizedBox(height: 20),
 
             // Save Changes Button
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Implement logic to save changes
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF8A53E0), // Purple color
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  elevation: 0,
-                ),
-                child: const Text(
-                  'Save Changes',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+            CustomButton(title: "Save Changes",onpress: (){},)
           ],
         ),
       ),

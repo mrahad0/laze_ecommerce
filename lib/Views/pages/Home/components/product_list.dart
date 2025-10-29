@@ -96,6 +96,12 @@ class _ProductListState extends State<ProductList> {
                         "${ApiConstant.baseUrl}${product.images[0]}",
                       ),
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image(
+                          image: AssetImage("assets/images/paper.png"),
+                          fit: BoxFit.cover,
+                        );
+                      }
                     ),
                   ),
                   Positioned(

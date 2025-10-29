@@ -62,6 +62,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     width: 280,
                     height: 280,
                     fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        "assets/images/paper.png",
+                        fit: BoxFit.contain,
+                      );
+                    }
                   ),
                 ),
 
@@ -113,7 +119,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    Image.network("${ApiConstant.baseUrl}${widget.image}"),
+                    Image.network("${ApiConstant.baseUrl}${widget.image}",
+                        errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        "assets/images/paper.png",
+                        fit: BoxFit.contain,
+                      );
+                    }),
+
                   ],
                 ),
                 ),),

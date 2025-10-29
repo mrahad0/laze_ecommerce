@@ -93,7 +93,6 @@ class AccountInformation extends StatelessWidget {
 
                       SizedBox(height: 20,),
 
-
                       InfoWidgets(
                           title: "Address",
                           value: '${item.address ??""}'
