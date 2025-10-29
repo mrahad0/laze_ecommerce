@@ -1,152 +1,207 @@
+import 'package:e_commerce/Routes/routes.dart';
 import 'package:e_commerce/Utils/color.dart';
+import 'package:e_commerce/controllers/userProfile_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../../Data/services/api_constant.dart';
 
-import 'edit_Screen.dart';
-// Make sure to import your UserProfile model and dummy data
-// import '../../models/user_profile_model.dart'; // Adjust path as needed
+class AccountInformation extends StatelessWidget {
+  AccountInformation({super.key});
 
-// Placeholder for UserProfile and dummyUser if the model file is not created yet
-class UserProfile {
-  final String name;
-  final String email;
-  final String phoneNumber;
-  final String country;
-  final String city;
-  final String address;
-  final String avatarUrl;
+  final UserprofileController userProfileController =
+  Get.put(UserprofileController());
 
-  UserProfile({
-    required this.name,
-    required this.email,
-    required this.phoneNumber,
-    required this.country,
-    required this.city,
-    required this.address,
-    required this.avatarUrl,
-  });
-}
-
-final UserProfile dummyUser = UserProfile(
-  name: 'Zakaria Rabby',
-  email: 'name@example.com',
-  phoneNumber: '0123654789',
-  country: 'Bangladesh',
-  city: 'Sylhet',
-  address: 'Chhatak, Sunamgonj 12/8AB',
-  avatarUrl: 'assets/images/Zakaria 1 (1).png', // Example URL
-);
-// End Placeholder
-
-
-class AccountInformationScreen extends StatelessWidget {
-  const AccountInformationScreen({super.key});
-
-  // Helper widget to display each information field
-  Widget _buildInfoField({required String label, required String value}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 14,
-            color: Colors.grey.shade600,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 20), // Spacing between fields
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
+    // Fetch profile data when screen is built
+    userProfileController.fetchUserInfo();
+
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
         title: const Text(
           'Account Information',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+          style: TextStyle(fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white, // AppBar background matches the image
-        elevation: 0, // No shadow for AppBar
+        elevation: 0,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // User Avatar
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 30.0),
-                child: CircleAvatar(
-                  radius: 50, // Size of the avatar
-                  backgroundColor: Colors.grey.shade200, // Placeholder background
-                  // Use NetworkImage for URL, or AssetImage for local assets
-                  backgroundImage: NetworkImage(dummyUser.avatarUrl),
-                  // If you use AssetImage: AssetImage('assets/images/your_avatar.png'),
-                ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Obx(()=>
+        userProfileController.isProductLoading.value
+            ? const Center(child: CircularProgressIndicator())
+            : userProfileController.userinfo.isEmpty
+            ? const Center(child: Text('No info available'))
+            :
+
+        SingleChildScrollView(
+          child:
+          Column(
+            children: [
+              // Information fields
+              ListView.builder(
+                itemCount:  userProfileController.userinfo.length,
+                itemBuilder: (context ,index){
+                  final item = userProfileController.userinfo[index];
+                  return  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      Center(
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              "${ApiConstant.baseUrl}${item.image}"
+                          ),
+                          radius: 50,
+                        ),
+                      ),
+                      InfoWidgets(
+                        title: "Name",
+                        value: '${item.firstName ??""}',
+                      ),
+                      SizedBox(height: 20,),
+                      InfoWidgets(
+                          title: "Email",
+                          value: '${item.email ??""}'
+                      ),
+
+                      SizedBox(height: 20,),
+
+
+                      InfoWidgets(
+                          title: "Phone",
+                          value: '${item.phone ??""}'
+                      ),
+
+                      SizedBox(height: 20,),
+
+
+                      InfoWidgets(
+                          title: "Country",
+                          value: '${item.country ??""}'
+                      ),
+                      SizedBox(height: 20,),
+
+                      SizedBox(height: 20,),
+
+
+                      InfoWidgets(
+                          title: "City",
+                          value: '${item.city ??""} '
+                      ),
+
+                      SizedBox(height: 20,),
+
+
+                      InfoWidgets(
+                          title: "Address",
+                          value: '${item.address ??""}'
+                      )
+
+                    ],
+                  );
+
+                },
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+
               ),
-            ),
 
-            // Information Fields
-            _buildInfoField(label: 'Name', value: dummyUser.name),
-            _buildInfoField(label: 'Email', value: dummyUser.email),
-            _buildInfoField(label: 'Phone Number', value: dummyUser.phoneNumber),
-            _buildInfoField(label: 'Country', value: dummyUser.country),
-            _buildInfoField(label: 'City', value: dummyUser.city),
-            _buildInfoField(label: 'Address', value: dummyUser.address),
+              const SizedBox(height: 20),
 
-            const SizedBox(height: 40), // Spacing before the button
-
-            // Edit Button
-            SizedBox(
-              width: double.infinity, // Button takes full width
-              height: 50, // Fixed height for the button
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  Get.to(EditScreen());
-                  },
-                icon: SvgPicture.asset("assets/icons/Edit.svg"),
-                label: Text(
-                  'Edit',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black ,
-                  ),
-                ),
+              // Edit button
+              ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Purple color from your screenshots
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10), // Rounded corners
-                    side: BorderSide(
-                      color: CustomColors.primaryColor
-                    )
-                  ),
-                  elevation: 0, // No shadow for the button
+                      borderRadius: BorderRadius.circular(10)),
+                  side: BorderSide(width: 2, color: CustomColors.primaryColor),
+                  backgroundColor: const Color(0xffF6F2FF),
+                  minimumSize: const Size(355, 50),
+                ),
+                onPressed: () {
+                  Get.toNamed(Routes.userEditScreen);
+                  // Handle edit button press
+                },
+                child:  Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.edit, color: Colors.black),
+                    SizedBox(width: 8),
+                    Text(
+                      'Edit',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        )),
       ),
+    );
+  }
+
+// Helper widget for cleaner UI
+/*  Widget buildInfoRow(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 100,
+            child: Text(
+              '$title:',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+                color: AppColor.textColor.withOpacity(0.7),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }*/
+
+
+}
+
+class InfoWidgets extends StatelessWidget {
+  final String? title;
+  final String? value;
+
+  InfoWidgets({super.key,  this.title,  this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment:CrossAxisAlignment.start ,
+      children: [
+        Text(
+          title ?? "",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: Colors.grey,
+          ),
+        ),
+        Text(
+          value ??"",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+        ),
+      ],
     );
   }
 }

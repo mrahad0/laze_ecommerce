@@ -21,7 +21,6 @@ class _ProductListState extends State<ProductList> {
 
       final _productController = Get.put(ProductController());
 
-
       List products = [
     {
       "productName": "Nike Sportswear Club Fleece",
@@ -55,11 +54,9 @@ class _ProductListState extends State<ProductList> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
-    return Obx(()=> _productController.isProductLoading.value?
-    Center(child: CircularProgressIndicator(),):
+        return Obx(()=> _productController.isProductLoading.value?
+    Center(
+      child: CircularProgressIndicator(),):
     MasonryGridView.count(
       crossAxisCount: 2,
       mainAxisSpacing: 10,
@@ -74,7 +71,15 @@ class _ProductListState extends State<ProductList> {
 
         return GestureDetector(
           onTap: (){
-
+            Get.to(ProductDetailScreen(
+              productName: product.name,
+              image: product.images[0],
+              price: product.price,
+              description:product.description.toString(),
+              sizes : product.sizes.toString(),
+              brandName: product.name,
+              brandImage: product.brand.toString(),
+            ));
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,22 +98,18 @@ class _ProductListState extends State<ProductList> {
                     ),
                   ),
                   Positioned(
-                    top: 10,
                     right: 10,
-                    child: Obx(() {
-
-                      return GestureDetector(
-                        onTap: () {
-
-                        },
-                        child: Icon(
-                          Icons.favorite,
-                          color: Colors.grey,
-                          size: 26,
-                        ),
-                      );
-                    }),
+                    top: 10,
+                    child: GestureDetector(
+                      onTap: () {
+                        // wishController.addToWishList(product);
+                      },
+                      child: SvgPicture.asset(
+                          "assets/icons/Heart.svg"),
+                    ),
                   ),
+
+
                 ],
               ),
               Text(

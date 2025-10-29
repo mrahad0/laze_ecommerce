@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-// --- Placeholder Model (Replace with your actual import) ---
 class UserProfile {
   final String name;
   final String email;
@@ -62,17 +61,6 @@ class _EditScreenState extends State<EditScreen> {
     _addressController = TextEditingController();
   }
 
-  @override
-  void dispose() {
-    // Dispose controllers to free up resources
-    _nameController.dispose();
-    _emailController.dispose();
-    _phoneController.dispose();
-    _countryController.dispose();
-    _cityController.dispose();
-    _addressController.dispose();
-    super.dispose();
-  }
 
   // Helper widget to build each input field
   Widget _buildTextField({
@@ -189,7 +177,6 @@ class _EditScreenState extends State<EditScreen> {
                 controller: _nameController,
                 hintText: "Zakaria Rabby"
             ),
-
             // Email Field with Lock Icon
             _buildTextField(
               label: 'Email',

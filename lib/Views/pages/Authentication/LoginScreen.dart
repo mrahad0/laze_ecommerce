@@ -14,7 +14,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   TextEditingController _userCtrl=TextEditingController();
+
   TextEditingController _passCtrl=TextEditingController();
 
   final AuthController _authController = Get.put(AuthController());
@@ -118,7 +120,6 @@ class _LoginScreenState extends State<LoginScreen> {
                          }
                        },),
                      ),
-
                     SizedBox(height: 20,),
 
                     Center(

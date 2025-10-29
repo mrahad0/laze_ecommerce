@@ -18,8 +18,8 @@ class ProductController extends GetxController{
 
     final response = await ApiClient.getData(ApiConstant.productDataEndPoint);
     if(response.statusCode == 200){
-
       List<dynamic> data = response.body['data'];
+
         productList.value = data.map((e) => ProductData.fromJson(e)).toList();
     }else{
       ApiChecker.checkApi(response);

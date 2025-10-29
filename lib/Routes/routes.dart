@@ -3,7 +3,10 @@
 
 import 'package:e_commerce/Views/pages/Home/chooseBrand_Screen.dart';
 import 'package:e_commerce/Views/pages/MainScreen/main_Screen.dart';
+import 'package:e_commerce/Views/pages/Profile/account_Info.dart';
+import 'package:e_commerce/Views/pages/Profile/edit_Screen.dart';
 import 'package:get/get.dart';
+import '../Views/pages/Address/address_Screen.dart';
 import '../Views/pages/Authentication/ForgotPassScreen.dart';
 import '../Views/pages/Authentication/LoginScreen.dart';
 import '../Views/pages/Authentication/NewPassScreen.dart';
@@ -37,11 +40,13 @@ class Routes{
   static String mainScreen="/main_screen";
   static String brandListScreen = "/brandList_Screen";
   static String paymentCard = "/payment_Card";
-
-
-
+  static String addressScreen = "/address_Screen";
+  static String userEditScreen = "/userEdit_Screen";
+  static String userInfoScreen = "/userInfo_Screen";
 
 }
+
+
 
 List<GetPage> pages=[
   GetPage(name: Routes.splashScreen, page: ()=>SplashScreen()),
@@ -59,5 +64,8 @@ List<GetPage> pages=[
   GetPage(name: Routes.mainScreen, page:()=> MainScreen()),
   GetPage(name: Routes.brandListScreen, page: () => BrandListScreen(brandLogoPath: Get.arguments,),),
   GetPage(name: Routes.paymentCard, page: () => PaymentCard()),
+  GetPage(name: Routes.addressScreen, page: () => AddressScreen()),
+  GetPage(name: Routes.userEditScreen, page: () => EditScreen()),
+  GetPage(name: Routes.userInfoScreen, page: () => AccountInformation()),
 
 ];

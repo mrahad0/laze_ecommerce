@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../Routes/routes.dart';
+
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
@@ -179,7 +181,9 @@ class _CartScreenState extends State<CartScreen> {
 
                     Spacer(),
 
-                    IconButton(onPressed: (){},
+                    IconButton(onPressed: (){
+                      Get.toNamed(Routes.addressScreen);
+                    },
                         icon:Icon( Icons.arrow_forward_ios_outlined, size: 15))
                   ],
                 ),
@@ -242,7 +246,7 @@ class _CartScreenState extends State<CartScreen> {
                     Spacer(),
 
                     IconButton(onPressed: (){
-                      Get.toNamed("/payment_Card");
+                      Get.toNamed(Routes.paymentCard);
                     },
                         icon:Icon( Icons.arrow_forward_ios_outlined, size: 15))
 

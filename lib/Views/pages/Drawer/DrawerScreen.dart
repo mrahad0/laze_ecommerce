@@ -64,7 +64,7 @@ class DrawerScreen extends StatelessWidget {
                         fontSize: 15),
                   ),
                   onTap: (){
-                    Get.to(AccountInformationScreen());
+                    Get.toNamed(Routes.userInfoScreen);
                   },
                 ),
 

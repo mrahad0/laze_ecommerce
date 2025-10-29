@@ -9,6 +9,11 @@ class ApiConstant{
   static String otp(String userName)=>"/auth/vefiry_for_forget/$userName/";
   static String reset_password="/auth/reset_password/";
   static String productDataEndPoint = "/shoping/products/?";
+  static String productDetail = "/shoping/products/";
+  static String userprofile = "/auth/profile/";
+  static String terms_condition = "/auth/terms/";
+
+
 
 
 }

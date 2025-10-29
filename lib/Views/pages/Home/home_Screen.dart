@@ -24,9 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
+
 
             /// <======== Welcome Text and Search Bar ========>
+
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
@@ -94,7 +96,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 20),
 
+
             /// <======== Choose Brand ========>
+
+
             ChooseBrands(),
 
             SizedBox(height: 20),
@@ -112,6 +117,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   ///========For App Bar========///
+
+
   _appBar() {
     return AppBar(
       leading: Padding(

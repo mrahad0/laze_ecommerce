@@ -157,4 +157,9 @@ class AuthController extends GetxController {
     isLoading(false);
   }
 
+//////===========================> Account Information Screen<========================
+
+
+
+
 }

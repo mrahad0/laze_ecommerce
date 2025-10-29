@@ -18,6 +18,10 @@ class E_CommerceApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: CustomColors.primaryColor,
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+        ),
+        scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: CustomColors.primaryColor),
       ),
       initialRoute: Routes.splashScreen,

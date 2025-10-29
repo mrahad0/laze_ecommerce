@@ -34,7 +34,7 @@ class OrderScreen extends StatelessWidget {
                 ),
               ),
 
-            //2nd tab bar view widget
+
 
               SingleChildScrollView(
                 padding: EdgeInsets.all(16.0),
@@ -60,7 +60,6 @@ class CustomCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ৪. Container ব্যবহার করে কার্ডের মতো লুক দেওয়া
     return Container(
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
@@ -75,11 +74,10 @@ class CustomCardWidget extends StatelessWidget {
           ),
         ],
       ),
-      // ৫. কন্টেইনারের ভেতরে Row নেওয়া
+
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Row Child 1: Image Placeholder
           Container(
             width: 80,
             height: 80,
@@ -91,13 +89,12 @@ class CustomCardWidget extends StatelessWidget {
           ),
           const SizedBox(width: 12.0),
 
-          // Row Child 2: Details Column
           Expanded(
-            // Row Child 2 এর ভেতরে Column নেওয়া
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Column Child 1: Product Title
+
                 const Text(
                   "Men's Tie-Dye T-Shirt Nike Sportswear",
                   style: TextStyle(
@@ -106,7 +103,7 @@ class CustomCardWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8.0),
-                // Column Child 2: Price
+
                 const Text(
                   "\$35.00",
                   style: TextStyle(
@@ -120,11 +117,11 @@ class CustomCardWidget extends StatelessWidget {
           ),
           const SizedBox(width: 8.0),
 
-          // Row Child 3: Button Column
+
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              // Button Column Child 1: Quantity
+
               Text(
                 'Qty: 1',
                 style: TextStyle(
@@ -133,7 +130,7 @@ class CustomCardWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12.0),
-              // Button Column Child 2: Action Button
+
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -158,8 +155,9 @@ class CustomCardWidget2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ৪. Container ব্যবহার করে কার্ডের মতো লুক দেওয়া
-    return Container(
+
+    return
+      Container(
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -173,11 +171,11 @@ class CustomCardWidget2 extends StatelessWidget {
           ),
         ],
       ),
-      // ৫. কন্টেইনারের ভেতরে Row নেওয়া
+
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Row Child 1: Image Placeholder
+
           Container(
               width: 80,
               height: 80,
@@ -189,13 +187,13 @@ class CustomCardWidget2 extends StatelessWidget {
           ),
           const SizedBox(width: 12.0),
 
-          // Row Child 2: Details Column
+
           Expanded(
-            // Row Child 2 এর ভেতরে Column নেওয়া
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Column Child 1: Product Title
+
                 const Text(
                   "Men's Tie-Dye T-Shirt Nike Sportswear",
                   style: TextStyle(
@@ -218,11 +216,11 @@ class CustomCardWidget2 extends StatelessWidget {
           ),
           const SizedBox(width: 8.0),
 
-          // Row Child 3: Button Column
+
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              // Button Column Child 1: Quantity
+
               Text(
                 'Qty: 1',
                 style: TextStyle(
@@ -231,7 +229,7 @@ class CustomCardWidget2 extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12.0),
-              // Button Column Child 2: Action Button
+
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
