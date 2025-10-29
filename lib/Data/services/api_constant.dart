@@ -12,6 +12,8 @@ class ApiConstant{
   static String productDetail = "/shoping/products/";
   static String userprofile = "/auth/profile/";
   static String terms_condition = "/auth/terms/";
+  static String privacy_policy = "/auth/privacy-policy/";
+
 
 
 

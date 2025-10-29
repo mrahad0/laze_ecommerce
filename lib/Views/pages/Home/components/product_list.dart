@@ -71,7 +71,8 @@ class _ProductListState extends State<ProductList> {
 
         return GestureDetector(
           onTap: (){
-            Get.to(ProductDetailScreen(
+            Get.to(
+                ProductDetailScreen(
               productName: product.name,
               image: product.images[0],
               price: product.price,

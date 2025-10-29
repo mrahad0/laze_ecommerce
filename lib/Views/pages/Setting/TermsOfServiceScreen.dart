@@ -1,4 +1,4 @@
-import 'package:e_commerce/controllers/terms&condition_controller.dart';
+import 'package:e_commerce/controllers/Terms_Policy_About/terms&condition_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
